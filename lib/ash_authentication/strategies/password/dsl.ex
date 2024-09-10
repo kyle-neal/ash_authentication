@@ -23,6 +23,8 @@ defmodule AshAuthentication.Strategy.Password.Dsl do
           hashed_password_field :hashed_password
           hash_provider AshAuthentication.BcryptProvider
           confirmation_required? true
+          tfa_required? false
+          tfa_email_field :email
         end
         """
       ],
@@ -63,6 +65,19 @@ defmodule AshAuthentication.Strategy.Password.Dsl do
           doc:
             "Whether a password confirmation field is required when registering or changing passwords.",
           default: true
+        ],
+        tfa_required?: [
+          type: :boolean,
+          required: false,
+          doc:
+            "Whether or not two-factor authentication is required for this strategy.",
+          default: false
+        ],
+        tfa_email_field: [
+          type: :atom,
+          doc:
+            "The name of the argument used to collect the user's email address when registering, checking or changing passwords.",
+          default: :email
         ],
         register_action_accept: [
           type: {:list, :atom},

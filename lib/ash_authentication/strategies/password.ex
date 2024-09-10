@@ -95,6 +95,8 @@ defmodule AshAuthentication.Strategy.Password do
   """
 
   defstruct confirmation_required?: false,
+            tfa_required?: false,
+            tfa_email_field: :email,
             hash_provider: AshAuthentication.BcryptProvider,
             hashed_password_field: :hashed_password_field,
             identity_field: :username,
@@ -129,6 +131,8 @@ defmodule AshAuthentication.Strategy.Password do
 
   @type t :: %Password{
           confirmation_required?: boolean,
+          tfa_required?: boolean,
+          tfa_email_field: atom,
           hash_provider: module,
           hashed_password_field: atom,
           identity_field: atom,
